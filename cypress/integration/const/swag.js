@@ -1,5 +1,5 @@
 const swag = {
-    usernames: [
+    usernamesList: [
         'Accepted usernames are:',
         'standard_user',
         'locked_out_user',
@@ -8,7 +8,7 @@ const swag = {
         'error_user'
     ],
 
-    password: [
+    passwordList: [
         'Password for all users:',
         'secret_sauce'
     ],
@@ -18,7 +18,17 @@ const swag = {
         'About',
         'Logout',
         'Reset App State'
-    ]
+    ],
+
+    itemsList: [
+        'Sauce Labs Backpack',
+        'Sauce Labs Bike Light',
+        'Sauce Labs Bolt T-Shirt',
+        'Sauce Labs Fleece Jacket',
+        'Sauce Labs Onesie',
+        'Test.allTheThings() T-Shirt (Red)',
+        ]
+
 };
 
 export default swag;

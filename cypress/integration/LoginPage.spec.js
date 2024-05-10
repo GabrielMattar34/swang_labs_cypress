@@ -1,39 +1,40 @@
+import methods from "./methods/methods";
 
 describe('Login page validation', () => {
     beforeEach (() => {
-        cy.visit('https://www.saucedemo.com');
+        methods.vistWebsite('https://www.saucedemo.com');
     });
 
     it('User should not be able to login without fill username', () => {
-        cy.get('[data-test="login-button"]').click();
+        methods.clickOnElement('[data-test="login-button"]');
         // Error message
-        cy.get('[data-icon="times"]').should('be.visible');
-        cy.get('[data-test="error"]').should('have.text', 'Epic sadface: Username is required').and('be.visible');
+        methods.elementIsVisible('[data-icon="times"]');
+        methods.assertMessage('Epic sadface: Username is required');
     });
 
     it('User should not be able to login without fill password', () => {
-        cy.get('[data-test="username"]').type('standard_user');
-        cy.get('[data-test="login-button"]').click();
+        methods.typeValueOnElement('[data-test="username"]', 'standard_user');
+        methods.clickOnElement('[data-test="login-button"]');
         // Error message
-        cy.get('[data-icon="times"]').should('be.visible');
-        cy.get('[data-test="error"]').should('have.text', 'Epic sadface: Password is required').and('be.visible');
+        methods.elementIsVisible('[data-icon="times"]');
+        methods.assertMessage('Epic sadface: Password is required');
     });
 
     it('User should not be able to login user wrong username or password', () => {
-        cy.get('[data-test="username"]').type('test');
-        cy.get('[data-test="password"]').type('test');
-        cy.get('[data-test="login-button"]').click();
+        methods.typeValueOnElement('[data-test="username"]', 'test');
+        methods.typeValueOnElement('[data-test="password"]', 'test');
+        methods.clickOnElement('[data-test="login-button"]');
         // Error message
-        cy.get('[data-icon="times"]').should('be.visible');
-        cy.get('[data-test="error"]').should('have.text', 'Epic sadface: Username and password do not match any user in this service').and('be.visible');
+        methods.elementIsVisible('[data-icon="times"]');
+        methods.assertMessage('Epic sadface: Username and password do not match any user in this service');
     })
 
-    it('user should be able to login using correct username and password', () => {
-        cy.get('[data-test="username"]').type('standard_user');
-        cy.get('[data-test="password"]').type('secret_sauce');
-        cy.get('[data-test="login-button"]').click();
+    it('User should be able to login using correct username and password', () => {
+        methods.typeValueOnElement('[data-test="username"]', 'standard_user');
+        methods.typeValueOnElement('[data-test="password"]', 'secret_sauce');
+        methods.clickOnElement('[data-test="login-button"]');
         // Confirm new page was opening
-        cy.get('.title').should('have.text', 'Products').and('be.visible');
-        cy.get('.active_option').should('have.text', 'Name (A to Z)').and('be.visible');
+        methods.assertTextAndBeVisible('.title', 'Products')
+        methods.assertTextAndBeVisible('.active_option', 'Name (A to Z)')
     });
 })
